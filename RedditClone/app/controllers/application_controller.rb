@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(session_token: session[:session_token])
   end
 
-  def login!
-    @current_user = @user
+  def login!(user)
+    @current_user = user
     session[:session_token] = @current_user.session_token
   end
 
