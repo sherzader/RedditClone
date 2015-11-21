@@ -12,6 +12,7 @@
 #
 class Post < ActiveRecord::Base
   validates :title, :author_id, presence: true
+  validate :ensure_sub_tags
 
   belongs_to :author,
     class_name: "User",
@@ -26,4 +27,10 @@ class Post < ActiveRecord::Base
   has_many :subs,
     through: :post_subs,
     source: :sub
+
+  def ensure_sub_tags
+    if self.sub_ids.empty? || self.sub_ids == [""]
+      errors[:sub_ids] = ["No Sub-Reddit Tags"]
+    end
+  end
 end

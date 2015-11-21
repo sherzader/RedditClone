@@ -11,3 +11,4 @@
     <li><%= link_to "#{sub.title}", sub_url(sub) %></li>
 <% end %>
 </ul>
+<%= button_to "Delete", post_url(@post), method: :delete %>

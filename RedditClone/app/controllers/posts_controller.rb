@@ -22,8 +22,8 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_url(@post)
     else
-      flash.now[:errors] = @post.errors.full_messages
-      render :edit
+      flash[:errors] = @post.errors.full_messages
+      redirect_to edit_post_url(@post)
     end
   end
 
@@ -34,8 +34,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-
     @post.delete
+    redirect_to subs_url
   end
 
   def show
